@@ -6,7 +6,6 @@ struct book catalog_mas[201];
 void input_books(struct book catalog_mas[], int *n) {
     printf("Введіть кількість книг (не більше 201): ");
     scanf("%d", n);
-    getchar(); // Очищаємо буфер після scanf
 
     if (*n > 201 || *n <= 0) {
         printf("Некоректна кількість книг. Використовуємо значення за замовчуванням: 5\n");
