@@ -49,17 +49,17 @@ cmake_ninja_workdir = C$:/Labs/cmake-build-debug/
 
 build cmake_object_order_depends_target_Labs: phony || .
 
-build CMakeFiles/Labs.dir/8_4/main.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/8_4/main.c || cmake_object_order_depends_target_Labs
-  DEP_FILE = CMakeFiles\Labs.dir\8_4\main.c.obj.d
+build CMakeFiles/Labs.dir/9_4/main.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/9_4/main.c || cmake_object_order_depends_target_Labs
+  DEP_FILE = CMakeFiles\Labs.dir\9_4\main.c.obj.d
   FLAGS = -g -std=gnu2x -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Labs.dir
-  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\8_4
+  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\9_4
 
-build CMakeFiles/Labs.dir/8_4/lib.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/8_4/lib.c || cmake_object_order_depends_target_Labs
-  DEP_FILE = CMakeFiles\Labs.dir\8_4\lib.c.obj.d
+build CMakeFiles/Labs.dir/9_4/lib.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/9_4/lib.c || cmake_object_order_depends_target_Labs
+  DEP_FILE = CMakeFiles\Labs.dir\9_4\lib.c.obj.d
   FLAGS = -g -std=gnu2x -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Labs.dir
-  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\8_4
+  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\9_4
 
 
 # =============================================================================
@@ -69,7 +69,7 @@ build CMakeFiles/Labs.dir/8_4/lib.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/La
 #############################################
 # Link the executable Labs.exe
 
-build Labs.exe: C_EXECUTABLE_LINKER__Labs_Debug CMakeFiles/Labs.dir/8_4/main.c.obj CMakeFiles/Labs.dir/8_4/lib.c.obj
+build Labs.exe: C_EXECUTABLE_LINKER__Labs_Debug CMakeFiles/Labs.dir/9_4/main.c.obj CMakeFiles/Labs.dir/9_4/lib.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Labs.dir

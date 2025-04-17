@@ -1,7 +1,7 @@
 #include "lib.h"
 #define SIZE 100
 int main(){
-    char *psent;  // Объявление как char *psent
+    char *psent;
     psent = malloc(100);  // Выделение памяти
     if (psent == NULL) {
         printf("Помилка виділення\n");
