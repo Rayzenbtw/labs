@@ -31,9 +31,9 @@ int main() {
             searchFictionByGenre(library, n, genre);
         } else if (menu == 3) {
             float min, max;
-            printf("Введіть мінімальну ціну: ");
+            printf("Мінімальна ціна: ");
             scanf("%f", &min);
-            printf("Введіть максимальну ціну: ");
+            printf("Максимальна ціна: ");
             scanf("%f", &max);
             searchByPrice(library, n, min, max);
         }

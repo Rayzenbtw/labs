@@ -22,26 +22,35 @@ typedef struct {
     char name[50];
 } Author;
 
-// Книга
+// FICTION додаткові дані
+typedef struct {
+    char genre[50];
+    char illustratorSurname[50];
+} FictionDetails;
+
+// TEXTBOOK додаткові дані
+typedef struct {
+    char subject[50];
+    int grade;
+} TextbookDetails;
+
+// Варіативні деталі книги
+typedef union {
+    FictionDetails fiction;
+    int wordCount;                // для словника
+    TextbookDetails textbook;
+} BookDetails;
+
+// Основна структура книги
 typedef struct {
     char title[100];
     Author author;
     float price;
     int year;
     Category category;
-
-    // FICTION
-    char genre[50];
-    char illustratorSurname[50];
-
-    // DICTIONARY
-    int wordCount;
-
-    // TEXTBOOK
-    char subject[50];
-    int grade;
-
+    BookDetails details;
 } Book;
+
 
 Category inputCategory();
 void inputBook(Book* b);
@@ -50,8 +59,6 @@ void printBook(Book b);
 void searchByCategory(Book books[], int n, Category c);
 void searchFictionByGenre(Book books[], int n, const char* genre);
 void searchByPrice(Book books[], int n, float min, float max);
-
-
 
 
 #endif //LIB_H

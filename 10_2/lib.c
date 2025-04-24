@@ -1,5 +1,6 @@
 #include "lib.h"
 
+// Введення категорії
 Category inputCategory() {
     int c;
     do {
@@ -27,19 +28,19 @@ void inputBook(Book* b) {
     switch (b->category) {
         case FICTION:
             printf("Жанр: ");
-            scanf(" %[^\n]", b->genre);
+            scanf(" %[^\n]", b->details.fiction.genre);
             printf("Прізвище ілюстратора: ");
-            scanf(" %[^\n]", b->illustratorSurname);
+            scanf(" %[^\n]", b->details.fiction.illustratorSurname);
             break;
         case DICTIONARY:
-            printf("Кількість слів: ");
-            scanf("%d", &b->wordCount);
+            printf("Кількість слів у словнику: ");
+            scanf("%d", &b->details.wordCount);
             break;
         case TEXTBOOK:
             printf("Предметна галузь: ");
-            scanf(" %[^\n]", b->subject);
+            scanf(" %[^\n]", b->details.textbook.subject);
             printf("Клас: ");
-            scanf("%d", &b->grade);
+            scanf("%d", &b->details.textbook.grade);
             break;
     }
 }
@@ -64,15 +65,15 @@ void printBook(Book b) {
 
     switch (b.category) {
         case FICTION:
-            printf("Жанр: %s\n", b.genre);
-            printf("Ілюстратор: %s\n", b.illustratorSurname);
+            printf("Жанр: %s\n", b.details.fiction.genre);
+            printf("Ілюстратор: %s\n", b.details.fiction.illustratorSurname);
             break;
         case DICTIONARY:
-            printf("Кількість слів: %d\n", b.wordCount);
+            printf("Кількість слів: %d\n", b.details.wordCount);
             break;
         case TEXTBOOK:
-            printf("Предмет: %s\n", b.subject);
-            printf("Клас: %d\n", b.grade);
+            printf("Предмет: %s\n", b.details.textbook.subject);
+            printf("Клас: %d\n", b.details.textbook.grade);
             break;
     }
 }
@@ -86,10 +87,11 @@ void searchByCategory(Book books[], int n, Category c) {
     }
 }
 
-// Пошук художніх за жанром
+// Пошук художніх книг за жанром
 void searchFictionByGenre(Book books[], int n, const char* genre) {
     for (int i = 0; i < n; i++) {
-        if (books[i].category == FICTION && strcmp(books[i].genre, genre) == 0) {
+        if (books[i].category == FICTION &&
+            strcmp(books[i].details.fiction.genre, genre) == 0) {
             printBook(books[i]);
         }
     }
@@ -104,6 +106,3 @@ void searchByPrice(Book books[], int n, float min, float max) {
         }
     }
 }
-
-
-
