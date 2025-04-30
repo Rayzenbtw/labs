@@ -14,9 +14,9 @@
 
 void sortAnogramma(char *str);
 bool isValid(char *text);
-void findAnograma(char *text);
+void findAnograma(char words[MAX_slov][MAX_len + 1], int wordCount);
 int end(char* word, char* ending);
-void removeln(char* text, char* ending);
-
-
+void removeln(char words[MAX_slov][MAX_len + 1], int* wordCount, char* ending);
+int splitWords(char* text, char words[MAX_slov][MAX_len + 1]);
+void combine_words(char words[MAX_slov][MAX_len + 1], int wordCount, char* result);
 #endif //LIB_H

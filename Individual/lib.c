@@ -31,25 +31,14 @@ bool isValid(char *text){ //перевірка на те, чи задовіль�
     }
     return true;
 };
-void findAnograma(char *text){//пошук анограми за допомогою функції sortAnogramma та функцій з string.h
-    char words[MAX_slov][MAX_len + 1];
-    int wordCount = 0;
-    char *token = strtok(text, " .");
-    while (token != NULL && wordCount < MAX_slov) {
-        strcpy(words[wordCount++], token);
-        token = strtok(NULL, " .");
-    }
-    if (wordCount == 0)
-        return;
-
+void findAnograma(char words[MAX_slov][MAX_len + 1], int wordCount) {
     char sortedFirst[MAX_len + 1];
-
     strcpy(sortedFirst, words[0]);
     sortAnogramma(sortedFirst);
 
     printf("Анаграммы первого слова: ");
     for (int i = 1; i < wordCount; i++) {
-        char sortedWord[MAX_len+ 1];
+        char sortedWord[MAX_len + 1];
         strcpy(sortedWord, words[i]);
         sortAnogramma(sortedWord);
         if (strcmp(sortedFirst, sortedWord) == 0) {
@@ -58,35 +47,46 @@ void findAnograma(char *text){//пошук анограми за допомог�
     }
     printf("\n");
 }
+
+
 int end(char* word, char* ending) {//перевірка чи закінчується слово на заданий рядок
     int wordlen = strlen(word);
     int endlen = strlen(ending);
     if(wordlen < endlen)
         return 0;
-    return strcmp(word + wordlen - endlen, ending) == 0;
+    return strcmp(word + wordlen - endlen, ending) == 0;// порівняння двох рядків
 }
 
-void removeln(char* text, char* ending) { char result[MAX_TEXT] = ""; //видалення слова яке повторюється
-    char word[MAX_len + 1];
-    int index = 0;
-    for (int i = 0; i <= strlen(text); i++){
-        if(isspace(text[i]) || text[i] == '.' || text[i] == '\0') {
-            if(index > 0){
-                word[index] = '\0';
-                if (!end(word, ending)) {
-                    strcat(result, word);
-                    if (text[i] != '\0') {
-                        strcat(result, " ");
-                    }
-                }
-                index = 0;
+void removeln(char words[MAX_slov][MAX_len + 1], int* wordCount, char* ending) {
+    int count = *wordCount;
+    int newCount = 0;
+
+    for (int i = 0; i < count; i++) {
+        if (!end(words[i], ending)) {
+            if (i != newCount) {
+                strcpy(words[newCount], words[i]); // перемістити слово вперед
             }
-            if (text[i] == '.') {
-                strcat(result, ".");
-            }
-        } else {
-            word[index++] = text[i];
+            newCount++;
         }
     }
-    strcpy(text, result);
+    *wordCount = newCount;
+}
+
+int splitWords(char* text, char words[MAX_slov][MAX_len + 1]) {
+    int wordCount = 0;
+    char *token = strtok(text, " .");
+    while (token != NULL && wordCount < MAX_slov) {
+        strcpy(words[wordCount++], token);
+        token = strtok(NULL, " .");
+    }
+    return wordCount;
+}
+
+void combine_words(char words[MAX_slov][MAX_len + 1], int wordCount, char* result) {
+    result[0] = '\0'; // очищення
+    for (int i = 0; i < wordCount; i++) {
+        strcat(result, words[i]);
+        if (i < wordCount - 1) strcat(result, " ");
+    }
+    strcat(result, ".");
 }
