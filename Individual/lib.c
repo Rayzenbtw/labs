@@ -81,12 +81,3 @@ int splitWords(char* text, char words[MAX_slov][MAX_len + 1]) {
     }
     return wordCount;
 }
-
-void combine_words(char words[MAX_slov][MAX_len + 1], int wordCount, char* result) {
-    result[0] = '\0'; // очищення
-    for (int i = 0; i < wordCount; i++) {
-        strcat(result, words[i]);
-        if (i < wordCount - 1) strcat(result, " ");
-    }
-    strcat(result, ".");
-}

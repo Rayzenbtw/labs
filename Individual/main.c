@@ -35,11 +35,13 @@ int main() {
     scanf("%s", ending);
     removeln(words, &wordCount, ending);
 
-    // Формуємо оновлений текст
-    char updatedText[MAX_TEXT];
-    combine_words(words, wordCount, updatedText);
-
-    printf("Оновлений текст: %s\n", updatedText);
+    printf("Оновлений текст: ");
+    for (int i = 0; i < wordCount; i++) {
+        printf("%s", words[i]);
+        if (i < wordCount - 1)
+            printf(" ");
+    }
+    printf(".\n");
 
     return 0;
 }
