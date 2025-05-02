@@ -49,17 +49,17 @@ cmake_ninja_workdir = C$:/Labs/cmake-build-debug/
 
 build cmake_object_order_depends_target_Labs: phony || .
 
-build CMakeFiles/Labs.dir/Individual/main.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/Individual/main.c || cmake_object_order_depends_target_Labs
-  DEP_FILE = CMakeFiles\Labs.dir\Individual\main.c.obj.d
+build CMakeFiles/Labs.dir/Individual_2/main.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/Individual_2/main.c || cmake_object_order_depends_target_Labs
+  DEP_FILE = CMakeFiles\Labs.dir\Individual_2\main.c.obj.d
   FLAGS = -g -std=gnu2x -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Labs.dir
-  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\Individual
+  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\Individual_2
 
-build CMakeFiles/Labs.dir/Individual/lib.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/Individual/lib.c || cmake_object_order_depends_target_Labs
-  DEP_FILE = CMakeFiles\Labs.dir\Individual\lib.c.obj.d
+build CMakeFiles/Labs.dir/Individual_2/lib.c.obj: C_COMPILER__Labs_unscanned_Debug C$:/Labs/Individual_2/lib.c || cmake_object_order_depends_target_Labs
+  DEP_FILE = CMakeFiles\Labs.dir\Individual_2\lib.c.obj.d
   FLAGS = -g -std=gnu2x -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Labs.dir
-  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\Individual
+  OBJECT_FILE_DIR = CMakeFiles\Labs.dir\Individual_2
 
 
 # =============================================================================
@@ -69,7 +69,7 @@ build CMakeFiles/Labs.dir/Individual/lib.c.obj: C_COMPILER__Labs_unscanned_Debug
 #############################################
 # Link the executable Labs.exe
 
-build Labs.exe: C_EXECUTABLE_LINKER__Labs_Debug CMakeFiles/Labs.dir/Individual/main.c.obj CMakeFiles/Labs.dir/Individual/lib.c.obj
+build Labs.exe: C_EXECUTABLE_LINKER__Labs_Debug CMakeFiles/Labs.dir/Individual_2/main.c.obj CMakeFiles/Labs.dir/Individual_2/lib.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Labs.dir
