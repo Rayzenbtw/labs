@@ -24,10 +24,10 @@ struct Dimensions {
 };
 
 union Specifics {
-    int suspensionTravel;  // для MOUNTAIN
-    float frameWeight;     // для ROAD
-    int gearCount;         // для HYBRID
-    int pegCount;          // для BMX
+    int suspensionTravel;  // для горного
+    float frameWeight;     // для доролжного
+    int gearCount;         // для гибридного
+    int pegCount;          // для бмх
 
     struct {
         char battery[50];         // акумулятор
@@ -63,6 +63,8 @@ void changePrice(struct Bicycle* bike, double newPrice);
 void inputBicyclesArray(struct Bicycle* bikes, int* count, int maxCount);
 int loginAsAdmin();
 void adminMenu(struct Bicycle* bikes, int* count, int maxCount);
-
+void writeToBinaryFile(struct Bicycle* bikes, int count, const char* filename);
+int readFromBinaryFile(struct Bicycle* bikes, int maxCount, const char* filename);
+void searchBicycleByBrand(const struct Bicycle* bikes, int count);
 
 #endif

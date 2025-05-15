@@ -258,3 +258,54 @@ void adminMenu(struct Bicycle* bikes, int* count, int maxCount) {
     } while (choice != 0);
 }
 
+void writeToBinaryFile(struct Bicycle* bikes, int count, const char* filename) {
+    FILE* file = fopen(filename, "wb");
+    if (!file) {
+        perror("Помилка відкриття файлу для запису");
+        return;
+    }
+
+    for (int i = 0; i < count; i++) {
+        fwrite(&bikes[i], sizeof(struct Bicycle), 1, file);
+    }
+
+    fclose(file);
+    printf("Успішно записано %d велосипедів у файл '%s'.\n", count, filename);
+}
+
+int readFromBinaryFile(struct Bicycle* bikes, int maxCount, const char* filename) {
+    FILE* file = fopen(filename, "rb");
+    if (!file) {
+        perror("Помилка відкриття файлу для читання");
+        return 0;
+    }
+
+    int count = 0;
+    while (count < maxCount && fread(&bikes[count], sizeof(struct Bicycle), 1, file) == 1) {
+        count++;
+    }
+
+    fclose(file);
+    printf("Успішно зчитано %d велосипедів з файлу '%s'.\n", count, filename);
+    return count;
+}
+
+void searchBicycleByBrand(const struct Bicycle* bikes, int count) {
+    char query[50];
+
+    printf("Введіть бренд для пошуку: ");
+    scanf(" %49[^\n]", query);
+
+    int found = 0;
+
+    for (int i = 0; i < count; i++) {
+        if (strstr(bikes[i].brand, query)) {
+            printf("\n[%d] ", i);
+            printBicycle(&bikes[i]);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("Велосипеди з брендом '%s' не знайдені.\n", query);
+    }
+}
