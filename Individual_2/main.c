@@ -27,8 +27,7 @@ int main() {
             break;
             case 2:
                 for (int i = 0; i < count; i++) {
-                    printf("\n[%d] ", i);
-                    printBicycle(&bikes[i]);
+                    printBicycle(&bikes[i], i);
                 }
             break;
             case 3:

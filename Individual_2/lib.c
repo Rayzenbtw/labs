@@ -13,7 +13,7 @@ enum State inputState() {
     scanf("%d", &state);
     return (enum State)state;
 }
-// Введення варіативної частини (union)
+// Введення юніона
 void inputSpecifics(union Specifics* specs, enum Type type) {
     switch (type) {
         case MOUNTAIN:
@@ -47,7 +47,6 @@ void inputSpecifics(union Specifics* specs, enum Type type) {
     }
 }
 
-// Введення повного об'єкта Bicycle
 void inputBicycle(struct Bicycle* bike) {
     printf("Введіть бренд: ");
     scanf(" %49[^\n]", bike->brand);
@@ -78,6 +77,7 @@ void printState(enum State state) {
     else
         printf("Стан: Б/у\n");
 }
+
 // Виведення union
 void printSpecifics(union Specifics* specs, enum Type type) {
     switch (type) {
@@ -104,8 +104,8 @@ void printSpecifics(union Specifics* specs, enum Type type) {
     }
 }
 // Виведення всієї структури Bicycle
-void printBicycle(struct Bicycle* bike) {
-    printf("\n--- Інформація про велосипед ---\n");
+void printBicycle(struct Bicycle* bike, int index) {
+    printf("\n[%d]--- Інформація про велосипед ---\n", index);
     printf("Бренд: %s\n", bike->brand);
     printf("Розмір колеса: %.1lf дюймів\n", bike->wheelSize);
     printf("Ціна: %.2lf грн\n", bike->price);
@@ -180,6 +180,7 @@ void adminMenu(struct Bicycle* bikes, int* count, int maxCount) {
         printf("2. Заміна акумулятора\n");
         printf("3. Зміна ціни\n");
         printf("4. Додати нові велосипеди\n");
+        printf("5. Видалити велосипед\n");
         printf("0. Назад\n> ");
         scanf("%d", &choice);
 
@@ -189,7 +190,7 @@ void adminMenu(struct Bicycle* bikes, int* count, int maxCount) {
                 for (int i = 0; i < *count; i++) {
                     if (bikes[i].Bikestate == USED) {
                         printf("[%d] ", i);
-                        printBicycle(&bikes[i]);
+                        printBicycle(&bikes[i], i);
                         found = 1;
                     }
                 }
@@ -211,7 +212,7 @@ void adminMenu(struct Bicycle* bikes, int* count, int maxCount) {
                 for (int i = 0; i < *count; i++) {
                     if (bikes[i].type == ELECTRIC && bikes[i].specs.electricData.statement == USED) {
                         printf("[%d] ", i);
-                        printBicycle(&bikes[i]);
+                        printBicycle(&bikes[i], i);
                         found = 1;
                     }
                 }
@@ -249,6 +250,14 @@ void adminMenu(struct Bicycle* bikes, int* count, int maxCount) {
             case 4:
                 inputBicyclesArray(bikes, count, maxCount);
                 break;
+            case 5: {
+                int index;
+                printf("Індекс велосипеда для видалення: ");
+                scanf("%d", &index);
+                removeBicycleByIndex(bikes, count, index);
+                break;
+            }
+
             case 0:
                 printf("Вихід з адмін-меню.\n");
                 break;
@@ -300,12 +309,28 @@ void searchBicycleByBrand(const struct Bicycle* bikes, int count) {
 
     for (int i = 0; i < count; i++) {
         if (strstr(bikes[i].brand, query)) {
-            printf("\n[%d] ", i);
-            printBicycle(&bikes[i]);
+            printBicycle(&bikes[i], i);
+
             found = 1;
         }
     }
     if (!found) {
         printf("Велосипеди з брендом '%s' не знайдені.\n", query);
     }
+}
+
+void removeBicycleByIndex(struct Bicycle* bikes, int* count, int index) {
+    if (index < 0 || index >= *count) {
+        printf("Невірний індекс. Неможливо видалити.\n");
+        return;
+    }
+
+    // Зрушення всіх елементів вліво
+    for (int i = index; i < *count - 1; i++) {
+        bikes[i] = bikes[i + 1];
+    }
+
+    (*count)--;
+
+    printf("Велосипед під індексом %d успішно видалено.\n", index);
 }
