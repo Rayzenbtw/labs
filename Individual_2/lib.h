@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-
 enum Type {
     MOUNTAIN = 1,
     ROAD,
@@ -17,17 +16,18 @@ enum State {
     NEW = 1,
     USED = 2
 };
-// Вкладена структура габарити велосипеда
+
+// розміри велосипеда
 struct Dimensions {
     float frameHeight;
     float length;
 };
 
 union Specifics {
-    int suspensionTravel;  // для MOUNTAIN
-    float frameWeight;     // для ROAD
-    int gearCount;         // для HYBRID
-    int pegCount;          // для BMX
+    int suspensionTravel;  // для горного
+    float frameWeight;     // для доролжного
+    int gearCount;         // для гибридного
+    int pegCount;          // для бмх
 
     struct {
         char battery[50];         // акумулятор
@@ -43,26 +43,30 @@ struct Bicycle {
     char brand[50];               // бренд
     double wheelSize;                // розмір колеса
     double price;                  // ціна
-    enum Type type;               // тип велосипеда
+    enum Type type;               // тип
     enum State Bikestate;         // стан
     struct Dimensions size;       // габарити
     union Specifics specs;        // спеціальні параметри
 };
 
-enum Type inputType();
-enum State inputState();
-void inputSpecifics(union Specifics* specs, enum Type type);
-void inputBicycle(struct Bicycle* bike);
-void printType(enum Type type);
-void printState(enum State state);
-void printSpecifics(union Specifics* specs, enum Type type);
-void printBicycle(struct Bicycle* bike);
-void repairBicycle(struct Bicycle* bike);
-void replaceBattery(struct Bicycle* bike, const char* newBattery);
-void changePrice(struct Bicycle* bike, double newPrice);
-void inputBicyclesArray(struct Bicycle* bikes, int* count, int maxCount);
-int loginAsAdmin();
-void adminMenu(struct Bicycle* bikes, int* count, int maxCount);
+enum Type inputType(); //ввод типу, на вхід - нічого, на вихід - тип який вводить коричтувач
+enum State inputState();//ввод стану, на вхід - нічого, на вихід - стан який вводить коричтувач
+void inputSpecifics(union Specifics* specs, enum Type type);//приймає обєднання, та тип,на вихід - нічого, записує специфікації в юніон
+void inputBicycle(struct Bicycle* bike);//приймає велосипед, на вихід - нічого, заповнює структуру велосипеда
+void printType(enum Type type);//приймає тип, на вихід - нічого, виводить тип
+void printState(enum State state);//приймає стан, на вихід - нічого, виводить стан
+void printSpecifics(union Specifics* specs, enum Type type);//приймає обєднання, та тип, на вихід - нічого, виводить специфікації
+void printBicycle(struct Bicycle* bike, int index);//приймає велосипед, та індекс, на вихід - нічого, виводить інформацію про велосипед
+void repairBicycle(struct Bicycle* bike);//приймає велосипед, на вихід - нічого, ремонтує велосипед
+void replaceBattery(struct Bicycle* bike, const char* newBattery);//приймає велосипед, та нову батарею, на вихід - нічого, змінює батарею велосипеда
+void changePrice(struct Bicycle* bike, double newPrice);//приймає велосипед, та нову ціну, на вихід - нічого, змінює ціну велосипеда
+void inputBicyclesArray(struct Bicycle* bikes, int* count, int maxCount);// приймає масив велосипедів, вказівник на кількість велосипедів, та максимальну кількість велосипедів, на вихід - нічого, заповнює масив велосипедами
+int loginAsAdmin();//вхід в адмін меню, на вхід - нічого, на вихід - 1 якщо пароль вірний, 0 якщо ні
+void adminMenu(struct Bicycle* bikes, int* count, int maxCount);//панель адміна
+void writeToBinaryFile(struct Bicycle* bikes, int count, const char* filename);//приймає масив велосипедів, кількість велосипедів, та назву файлу, на вихід - нічого, записує масив у файл
+int readFromBinaryFile(struct Bicycle* bikes, int maxCount, const char* filename);//приймає масив велосипедів, максимальну кількість велосипедів, та назву файлу, на вихід - кількість прочитаних велосипедів, відкриває файл, та зчитує масив
+void searchBicycleByBrand(const struct Bicycle* bikes, int count);//приймає масив велосипедів, та кількість велосипедів, на вихід - нічого, шукає велосипеди за брендом
+void removeBicycleByIndex(struct Bicycle* bikes, int* count, int index);//приймає масив велосипедів, вказівник на кількість велосипедів, та індекс велосипеда, на вихід - нічого, видаляє велосипед з масиву
 
 
 #endif
